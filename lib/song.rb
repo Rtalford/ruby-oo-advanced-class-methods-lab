@@ -1,3 +1,5 @@
+require "pry"
+
 class Song
   attr_accessor :name, :artist_name
   @@all = []
@@ -43,10 +45,20 @@ class Song
   end 
 
   def self.new_from_filename(name)
-     
+    split_name = name.chomp(".mp3").split(" - ")
+    song = Song.new
+    song.name = split_name[1]
+    song.artist_name = split_name[0]
+    song
   end 
 
   def self.create_from_filename(name)
+    split_name = name.chomp(".mp3").split(" - ")
+    song = Song.new
+    song.name = split_name[1]
+    song.artist_name = split_name[0]
+    song.save
+    song 
   end
 
   def self.destroy_all
